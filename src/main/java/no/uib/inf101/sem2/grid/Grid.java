@@ -37,7 +37,6 @@ public class Grid<E> implements IGrid<E>{
 
     @Override
     public Iterator<GridCell<E>> iterator() {
-        // TODO Auto-generated method stub
         List<GridCell<E>> result = new ArrayList<>();
         for (int i = 0; i < this.rows; i++) {
           for (int j = 0; j < this.cols; j++){

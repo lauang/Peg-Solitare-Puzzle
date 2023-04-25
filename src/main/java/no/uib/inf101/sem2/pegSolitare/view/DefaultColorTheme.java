@@ -22,7 +22,7 @@ public class DefaultColorTheme implements ColorTheme {
 
     @Override
     public Color getFrameColor() {
-        return Color.BLACK;   
+        return Color.WHITE;   
     }
 
     @Override
@@ -38,6 +38,11 @@ public class DefaultColorTheme implements ColorTheme {
     @Override
     public Color getTextColor() {
         return Color.WHITE;
+    }
+
+    @Override
+    public Color getGameMenuColor() {
+        return Color.GRAY;
     }
     
 }

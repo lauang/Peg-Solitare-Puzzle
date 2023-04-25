@@ -9,15 +9,17 @@ import no.uib.inf101.sem2.grid.GridCell;
 import no.uib.inf101.sem2.pegSolitare.model.PegBoard;
 import no.uib.inf101.sem2.pegSolitare.model.peg.PegBoardShape;
 
+/**
+ * Class represent a 2D list of pins
+ */
 public class Pin implements Iterable<GridCell<Character>>{
     int rows;
     int cols;
-    private CellPosition cp;
-    private char c;
-    PegBoardShape pegBoardShape;
-    List<List<GridCell<Character>>> pegList;
+    private PegBoardShape pegBoardShape;
+    private List<List<GridCell<Character>>> pegList;
     private PegBoard board;
 
+    //Konstruktør
     public Pin (PegBoardShape pegBoardShape, PegBoard board) {
         this.pegBoardShape = pegBoardShape;
         this.board = board;
@@ -33,7 +35,7 @@ public class Pin implements Iterable<GridCell<Character>>{
         }
         fillTheBoard();
     }
-
+    //Fyller brettet med brikker på alle plasser der det allerede finnes en B
     public void fillTheBoard() {
         for (GridCell<Character> gc : pegBoardShape) {
             if (gc.value() == 'B') {
@@ -42,18 +44,8 @@ public class Pin implements Iterable<GridCell<Character>>{
         }
     }
 
-   /*@Override
-    public Iterator<GridCell<Character>> iterator() {
-        List<GridCell<Character>> ifInBoard = new ArrayList<>();
-        for (GridCell<Character> gc : pegBoardShape) {
-            if (gc.value() == 'B') {
-                ifInBoard.add(new GridCell<Character>(
-                    gc.pos(), 'i'));
-            }
-        }
-        return ifInBoard.iterator();
-    }*/
-
+    //Iterator, går igjennom brettet og legger til verdier i result
+    //Henter verdier fra pegList
     @Override
     public Iterator<GridCell<Character>> iterator() {
         List<GridCell<Character>> result = new ArrayList<>();
@@ -65,11 +57,11 @@ public class Pin implements Iterable<GridCell<Character>>{
         return result.iterator();
     }
 
-
+    //Setter en peg på en gitt celle 
     public void setPeg(CellPosition cp, char c) {
         this.pegList.get(cp.row()).set(cp.col(), new GridCell<Character>(cp, c));
     }
-
+    //Henter ut verdien på en gitt celle
     public char getPegValue(CellPosition cp) {
         return pegList.get(cp.row()).get(cp.col()).value();
     }

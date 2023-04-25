@@ -2,8 +2,8 @@ package no.uib.inf101.sem2.pegSolitare.model.peg;
 
 public interface PegBoardInterface {
     /**
-     * 
-     * @return a peg board level
+     * @param shape of a pegboard
+     * @return a pegboard shape
      */
-    PegBoardShape getBoard();
+    PegBoardShape getBoard(char shape);
 }

@@ -38,4 +38,11 @@ public interface ColorTheme {
      */
 
     Color getTextColor ();
+
+    /**
+     * This returns the game over color on top of the game-board
+     * @return color
+     */
+
+     Color getGameMenuColor ();
 }

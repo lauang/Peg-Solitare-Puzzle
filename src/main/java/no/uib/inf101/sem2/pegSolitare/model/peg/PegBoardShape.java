@@ -6,21 +6,22 @@ import java.util.Iterator;
 
 import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.grid.GridCell;
-import no.uib.inf101.sem2.pegSolitare.model.pin.Pin;
 
+/**
+ * Class represents different pegboard shapes
+ */
 public class PegBoardShape implements Iterable<GridCell<Character>> {
 
-    private char c;
-    public boolean[][] boardShape;
+    private boolean[][] boardShape;
     private CellPosition pos;
 
+    //Konstruktør
     public PegBoardShape(char c, boolean[][] boardShape) {
-        //Lagrer feltvariablene 
-        this.c = c;
         this.boardShape = boardShape;
         this.pos = new CellPosition(0, 0);
     }
 
+    //Oppretter brettet med hensikt på hvilken char som parameter
     public static PegBoardShape newPegBoardShape(char c){
         boolean[][] boardShape = switch (c) {
             case 'E' -> boardShape = new boolean[][] {
@@ -58,6 +59,30 @@ public class PegBoardShape implements Iterable<GridCell<Character>> {
                 { false, false, false, true, true, true, false, false, false},
                 { false, false, false, false, false, false, false, false, false},
             };
+            //Test board
+            case 'T' -> boardShape = new boolean[][] {
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, true, false, false, false, false},
+                { false, false, false, true, true, true, false, false, false},
+                { false, false, false, true, true, true, false, false, false},
+                { false, false, false, true, true, true, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+            };
+            //Winning board
+            case 'W' -> boardShape = new boolean[][] {
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, true, false, false, false, false},
+                { false, false, false, false, true, false, false, false, false},
+                { false, false, false, false, true, false, false, false, false},
+                { false, false, false, false, true, false, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+                { false, false, false, false, false, false, false, false, false},
+            };
             default -> throw new IllegalArgumentException(
                 "No available shape for '" + c + "'");
         };
@@ -66,11 +91,12 @@ public class PegBoardShape implements Iterable<GridCell<Character>> {
 
     @Override
     public Iterator<GridCell<Character>> iterator() {
-        
+        //Går gjennom alle verdiene i pegboardshape
         List<GridCell<Character>> ifTrueList = new ArrayList<>();
         for (int i = 0; i < boardShape.length; i ++) {
           for (int j = 0; j < boardShape[0].length; j ++){
-
+            //Hvis verdien er true, så får cellen verdien B
+            //B er en gyldig posisjon i griden, blå celle
             if (boardShape [i][j] == true) {
                 ifTrueList.add(new GridCell<Character>(
                     new CellPosition(this.pos.row() + i, this.pos.col() + j), 'B'));
@@ -80,6 +106,7 @@ public class PegBoardShape implements Iterable<GridCell<Character>> {
         }
         return ifTrueList.iterator();
     }
+
 
     
 

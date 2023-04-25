@@ -1,13 +1,14 @@
 package no.uib.inf101.sem2.pegSolitare.model;
 
-import java.awt.geom.Rectangle2D;
-
 import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.grid.GridDimension;
 
-public class PixelToCellPositionConverter {    
 
-    //Hele denne filen er det Mathias Hop Ness som har laget 
+/**
+ * @author Mathias Hop Ness
+ */
+
+public class PixelToCellPositionConverter { 
 
     private CellData area;
     private GridDimension gd;

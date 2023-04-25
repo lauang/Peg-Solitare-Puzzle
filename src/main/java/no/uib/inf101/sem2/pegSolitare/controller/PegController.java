@@ -1,56 +1,68 @@
 package no.uib.inf101.sem2.pegSolitare.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.Timer;
 
-import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.pegSolitare.model.GameState;
-import no.uib.inf101.sem2.pegSolitare.model.PixelToCellPositionConverter;
+import no.uib.inf101.sem2.pegSolitare.model.PegModel;
 import no.uib.inf101.sem2.pegSolitare.model.Position;
+import no.uib.inf101.sem2.pegSolitare.model.peg.PegBoardShape;
+import no.uib.inf101.sem2.pegSolitare.model.peg.PegLevel;
 import no.uib.inf101.sem2.pegSolitare.view.PegSolitareView;
 
-public class PegController implements java.awt.event.MouseMotionListener, java.awt.event.MouseListener{
+/**
+ * Class represent the controller of the game
+ */
+public class PegController implements java.awt.event.MouseMotionListener, java.awt.event.MouseListener, java.awt.event.KeyListener{
 
-    private ControllablePegModel controllablePegModel;
+    private PegModel pegModel;
     private PegSolitareView pegSolitareView;
     private boolean mouseIsClicked = false;
     private Timer timer;
-    GameState gameState;
-    int xmouse=0, ymouse=0;
+    public GameState gameState;
+    private int xmouse=0, ymouse=0;
+    private boolean gameHasStarted = false;
 
-    public PegController(ControllablePegModel controllablePegModel, PegSolitareView pegSolitareView){
-        this.controllablePegModel = controllablePegModel;
+    //Konstruktør
+    public PegController(PegModel pegModel, PegSolitareView pegSolitareView){
+        this.pegModel = pegModel;
         this.pegSolitareView = pegSolitareView;
         this.pegSolitareView.addMouseListener(this);
         this.timer = new Timer(1000/60, this::clockTick);
-        this.gameState = GameState.ACTIVE_GAME;
-        this.timer.start();
+        pegSolitareView.addKeyListener(this);
     }
 
     private void clockTick(ActionEvent actionEvent) {
-        if (controllablePegModel.getGameState() == GameState.ACTIVE_GAME){
-            controllablePegModel.clockTick();
+        if (pegModel.getGameState() == GameState.ACTIVE_GAME){
             pegSolitareView.repaint();
+            
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        mouseIsClicked = true;
-        xmouse = e.getX();
-        ymouse = e.getY();
-        controllablePegModel.cellClicked(new Position(xmouse, ymouse));
-        pegSolitareView.repaint();
+        //Hvis spillet er i en active gamestate
+        if (pegModel.getGameState() == GameState.ACTIVE_GAME) {
+            mouseIsClicked = true;
+            xmouse = e.getX();
+            ymouse = e.getY();
+            //Sjekker hvilken celle ble klikket på
+            pegModel.cellClicked(new Position(xmouse, ymouse));
+            pegSolitareView.repaint();
+
+            if(gameHasStarted == false) {
+                this.timer.start();
+            }
+            gameHasStarted = true;
+        }
+        
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-
+    public void mouseMoved(MouseEvent arg0) {
     }
 
     @Override
@@ -72,5 +84,53 @@ public class PegController implements java.awt.event.MouseMotionListener, java.a
     @Override
     public void mouseDragged(MouseEvent arg0) {
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //Hvis man har tapt eller vunnet
+        if (pegModel.getGameState() == GameState.GAME_OVER || pegModel.getGameState() == GameState.GAME_WON){
+            //Trykk på R for å komme tilbake til main menu
+            if(e.getKeyCode() == KeyEvent.VK_R){
+                pegModel.setGameState(GameState.GAME_MENU);
+            }
+        }
+        //Hvis man er i main menu
+        if (pegModel.getGameState() == GameState.GAME_MENU){
+
+            PegLevel pegLevel = new PegLevel();
+            PegBoardShape pegBoardShape;
+            //Velger level ved å klikke på 1, 2, 3 eller 4
+            if(e.getKeyCode() == KeyEvent.VK_1){
+                pegBoardShape = pegLevel.getBoard('W');
+                pegModel.updatePegBoard(pegBoardShape);
+                pegModel.setGameState(GameState.ACTIVE_GAME);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_2){
+                pegBoardShape = pegLevel.getBoard('E');
+                pegModel.updatePegBoard(pegBoardShape);
+                pegModel.setGameState(GameState.ACTIVE_GAME);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_3){
+                pegBoardShape = pegLevel.getBoard('F');
+                pegModel.updatePegBoard(pegBoardShape);
+                pegModel.setGameState(GameState.ACTIVE_GAME);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_4){
+                pegBoardShape = pegLevel.getBoard('O');
+                pegModel.updatePegBoard(pegBoardShape);
+                pegModel.setGameState(GameState.ACTIVE_GAME);
+            }
+        }
+        pegSolitareView.repaint();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent arg0) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+    }
+    
     
 }

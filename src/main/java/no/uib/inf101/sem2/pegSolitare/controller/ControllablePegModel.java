@@ -5,20 +5,23 @@ import no.uib.inf101.sem2.pegSolitare.model.GameState;
 import no.uib.inf101.sem2.pegSolitare.model.Position;
 
 public interface ControllablePegModel {
-    
+
+    /**
+     * 
+     * @param pos of the clicked cell
+     * @return a cell position for the clicked cell
+     */
     CellPosition cellClicked(Position pos);
 
-    void selectPeg(CellPosition cp);
+ 
 
-    void removePeg(CellPosition cp);
 
-    void movePeg(CellPosition cp);
 
-    void clockTick();
+  
 
      /**
      * 
-     * @return gamestate
+     * @return current gamestate
      */
     GameState getGameState();
 }
