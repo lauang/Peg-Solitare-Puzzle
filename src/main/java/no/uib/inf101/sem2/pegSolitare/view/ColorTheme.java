@@ -1,14 +1,16 @@
 package no.uib.inf101.sem2.pegSolitare.view;
 
-
 import java.awt.Color;
 
+/**
+ * Interface for the colors
+ */
 public interface ColorTheme {
     
     /**
-     * This returns the color of each cell given a charater.
+     * 
      * @param c
-     * @return
+     * @return a color of each cell given a charater
      * @throws IllegalArgumentException throws exception if value = null and if the char is undefined 
      */
     Color getCellColor(char c) throws IllegalArgumentException;
@@ -40,7 +42,7 @@ public interface ColorTheme {
     Color getTextColor ();
 
     /**
-     * This returns the game over color on top of the game-board
+     * This returns the game menu color
      * @return color
      */
 

@@ -4,6 +4,9 @@ import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.pegSolitare.model.GameState;
 import no.uib.inf101.sem2.pegSolitare.model.Position;
 
+/**
+ * Interface for the controller
+ */
 public interface ControllablePegModel {
 
     /**
@@ -12,12 +15,6 @@ public interface ControllablePegModel {
      * @return a cell position for the clicked cell
      */
     CellPosition cellClicked(Position pos);
-
- 
-
-
-
-  
 
      /**
      * 

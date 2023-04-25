@@ -59,7 +59,7 @@ public class PegBoardShape implements Iterable<GridCell<Character>> {
                 { false, false, false, true, true, true, false, false, false},
                 { false, false, false, false, false, false, false, false, false},
             };
-            //Test board
+            //Test, losing board
             case 'T' -> boardShape = new boolean[][] {
                 { false, false, false, false, false, false, false, false, false},
                 { false, false, false, false, false, false, false, false, false},

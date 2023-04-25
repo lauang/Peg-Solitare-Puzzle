@@ -4,13 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.grid.GridCell;
-import no.uib.inf101.sem2.pegSolitare.model.peg.PegBoardInterface;
-import no.uib.inf101.sem2.pegSolitare.model.peg.PegBoardShape;
-import no.uib.inf101.sem2.pegSolitare.model.peg.PegLevel;
-import no.uib.inf101.sem2.pegSolitare.model.pin.Pin;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.ArrayList;
@@ -117,8 +111,5 @@ public class TestPegModel {
 
     //Sjekker om skyggen ble omgjort til en peg
     assertTrue(pegCells3.contains(new GridCell<>(new CellPosition(5, 5), 'i')));
-    }
-    
-    
-    
+    }    
 }

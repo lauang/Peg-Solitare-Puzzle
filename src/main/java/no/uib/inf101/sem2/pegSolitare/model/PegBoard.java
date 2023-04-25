@@ -17,4 +17,25 @@ public class PegBoard extends Grid<Character>{
             }
         }
     }
+
+    /**
+     * To test the pegboard
+     * @return a string
+     */
+    public String prettyString() {
+        String result = "";
+        for (int i = 0; i < rows; i++){
+            String row = "";
+            for (int j = 0; j < cols; j++) {
+                row += this.get(new CellPosition(i, j));
+            }
+            if (i == rows - 1) {
+                result += row;
+            }
+            else{
+                result +=row +"\n";
+            }
+        }
+        return result;
+    }
 }

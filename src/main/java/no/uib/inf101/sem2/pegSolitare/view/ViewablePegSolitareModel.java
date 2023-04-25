@@ -4,6 +4,9 @@ import no.uib.inf101.sem2.grid.GridCell;
 import no.uib.inf101.sem2.grid.GridDimension;
 import no.uib.inf101.sem2.pegSolitare.model.GameState;
 
+/**
+ * Interface for the view
+ */
 public interface ViewablePegSolitareModel {
     /**
      * 

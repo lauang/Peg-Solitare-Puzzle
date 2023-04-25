@@ -12,6 +12,9 @@ import no.uib.inf101.sem2.grid.GridCell;
 import no.uib.inf101.sem2.pegSolitare.model.GameState;
 import no.uib.inf101.sem2.pegSolitare.model.PegModel;
 
+/**
+ * Class represents the view for the game
+ */
 public class PegSolitareView extends JPanel {
     private static final double OUTERMARGIN = 16;
     private static final double cellMargin = 1;

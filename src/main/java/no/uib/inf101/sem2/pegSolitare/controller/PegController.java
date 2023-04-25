@@ -20,9 +20,8 @@ public class PegController implements java.awt.event.MouseMotionListener, java.a
 
     private PegModel pegModel;
     private PegSolitareView pegSolitareView;
-    private boolean mouseIsClicked = false;
+    boolean mouseIsClicked = false;
     private Timer timer;
-    public GameState gameState;
     private int xmouse=0, ymouse=0;
     private boolean gameHasStarted = false;
 
@@ -38,18 +37,15 @@ public class PegController implements java.awt.event.MouseMotionListener, java.a
     private void clockTick(ActionEvent actionEvent) {
         if (pegModel.getGameState() == GameState.ACTIVE_GAME){
             pegSolitareView.repaint();
-            
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        //Hvis spillet er i en active gamestate
         if (pegModel.getGameState() == GameState.ACTIVE_GAME) {
             mouseIsClicked = true;
             xmouse = e.getX();
             ymouse = e.getY();
-            //Sjekker hvilken celle ble klikket på
             pegModel.cellClicked(new Position(xmouse, ymouse));
             pegSolitareView.repaint();
 
@@ -87,26 +83,26 @@ public class PegController implements java.awt.event.MouseMotionListener, java.a
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //Hvis man har tapt eller vunnet
         if (pegModel.getGameState() == GameState.GAME_OVER || pegModel.getGameState() == GameState.GAME_WON){
-            //Trykk på R for å komme tilbake til main menu
+
             if(e.getKeyCode() == KeyEvent.VK_R){
                 pegModel.setGameState(GameState.GAME_MENU);
             }
         }
-        //Hvis man er i main menu
+        
         if (pegModel.getGameState() == GameState.GAME_MENU){
 
             PegLevel pegLevel = new PegLevel();
             PegBoardShape pegBoardShape;
-            //Velger level ved å klikke på 1, 2, 3 eller 4
+            //Level 1 is a winning board
             if(e.getKeyCode() == KeyEvent.VK_1){
                 pegBoardShape = pegLevel.getBoard('W');
                 pegModel.updatePegBoard(pegBoardShape);
                 pegModel.setGameState(GameState.ACTIVE_GAME);
             }
+            //Level 2 is a losing board
             if(e.getKeyCode() == KeyEvent.VK_2){
-                pegBoardShape = pegLevel.getBoard('E');
+                pegBoardShape = pegLevel.getBoard('T');
                 pegModel.updatePegBoard(pegBoardShape);
                 pegModel.setGameState(GameState.ACTIVE_GAME);
             }

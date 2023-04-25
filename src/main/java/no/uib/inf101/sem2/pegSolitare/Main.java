@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 
 public class Main {
   public static void main(String[] args) {
-    
     PegBoard pegBoard = new PegBoard(9, 9);
     PegModel pegModel = new PegModel(pegBoard);
     PegSolitareView view = new PegSolitareView(pegModel);
@@ -22,6 +21,6 @@ public class Main {
     frame.setContentPane(view);
     frame.pack();
     frame.setVisible(true);
-    
+
   }
 }

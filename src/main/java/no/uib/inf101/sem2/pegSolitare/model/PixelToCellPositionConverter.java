@@ -6,6 +6,7 @@ import no.uib.inf101.sem2.grid.GridDimension;
 
 /**
  * @author Mathias Hop Ness
+ * Class converts a pixel position to a cellposition
  */
 
 public class PixelToCellPositionConverter { 
@@ -21,6 +22,11 @@ public class PixelToCellPositionConverter {
         this.margin = margin;
     }
     
+    /**
+     * Converts a position to cellposition
+     * @param pos a position
+     * @return a cellposition
+     */
     public CellPosition PixelToCellPosition(Position pos){
         double x = pos.x();
         double y = pos.y();
@@ -35,6 +41,11 @@ public class PixelToCellPositionConverter {
         return new CellPosition((int)row, (int)col);
     }
     
+    /**
+     * Checks if a position is on the grid, 
+     * @param pos a position
+     * @return false if not on grid, and true if on grid
+     */
     public boolean pixelIsOnGrid(Position pos) {
         double x = pos.x();
         double y = pos.y();
